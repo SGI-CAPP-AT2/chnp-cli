@@ -22,7 +22,7 @@ const create = (path, args) => {
     path + "/____chnpsession_cohls",
     JSON.stringify(sessionObject)
   );
-  return STATUS.SUCESSFULL;
+  return config(path);
 };
 
 const erase = (path, args) => {
@@ -36,7 +36,7 @@ const erase = (path, args) => {
   return STATUS.SUCESSFULL;
 };
 
-const config = (path, args) => {
+const config = (path) => {
   if (!fs.existsSync("____chnpsession_cohls"))
     return STATUS[console.log(`No Session Detected`)];
   const commandsBatch = [];

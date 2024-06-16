@@ -122,4 +122,21 @@ const add = async (path, args) => {
   return STATUS.SUCESSFULL;
 };
 
-module.exports = { create, erase, config, add };
+const pop = async (path) => {
+  if (!fs.existsSync("____chnpsession_cohls"))
+    return STATUS[console.log(`No Session Detected`)];
+  const sessionObject = JSON.parse(
+    fs.readFileSync(path + "/____chnpsession_cohls")
+  );
+  const { codes } = sessionObject;
+  if (codes.length > 0) codes.pop();
+  else return STATUS[console.log(`No Codes Added`)];
+  sessionObject.codes = codes;
+  fs.writeFileSync(
+    path + "/____chnpsession_cohls",
+    JSON.stringify(sessionObject)
+  );
+  return STATUS.SUCESSFULL;
+};
+
+module.exports = { create, erase, config, add, pop };

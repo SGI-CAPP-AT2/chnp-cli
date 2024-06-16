@@ -11,4 +11,8 @@ const getArgsJson = (args) => {
   }
   return argJson;
 };
-module.exports = { replaceWithArgs, getArgsJson };
+const getCommandNArgs = (c) => {
+  const [command, ...args] = c.split(" ");
+  return { command, args };
+};
+module.exports = { replaceWithArgs, getArgsJson, getCommandNArgs };

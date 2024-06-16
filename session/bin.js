@@ -10,14 +10,15 @@ const main = async () => {
   try {
     const status = await operators[op](wd, args);
     console.log(chalk[colors[status]](`Operation is done ${meaning[status]}`));
-    if (status in [STATUS.UNSUCCESSFULL, STATUS.undefined]) process.exit(1);
+    if (status === 1) process.exit(1);
   } catch (e) {
-    console.log(e);
     console.log(
       chalk.red(
         "Operator not found\n  use 'cohl shelp' to get available operators"
       )
     );
+    process.exit(1);
   }
+  process.exit(0);
 };
 main();

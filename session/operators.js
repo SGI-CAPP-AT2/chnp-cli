@@ -2,7 +2,12 @@ const { STATUS } = require("./exec_status.js");
 const fs = require("fs");
 const prompt = require("prompt-sync")({ sigint: true });
 const util = require("util");
-const { replaceWithArgs, getArgsJson } = require("../helpers/argHelper.js");
+const {
+  replaceWithArgs,
+  getArgsJson,
+  getCommandNArgs,
+} = require("../helpers/argHelper.js");
+const { executeCommand } = require("../helpers/executeCommand.js");
 const exec = util.promisify(require("child_process").exec);
 
 const create = async (path, args) => {
@@ -77,19 +82,21 @@ const add = async (path, args) => {
   const argJson = getArgsJson(args);
   const filename = replaceWithArgs(filenameWhileAdding, argJson);
   let output = "";
-  for (let command of batchOfCommands) {
-    if (command != "") {
+  for (let commandString of batchOfCommands) {
+    if (commandString != "") {
       try {
-        const { stdout, stderr } = await exec(
-          replaceWithArgs(command, argJson)
+        const { command, args } = getCommandNArgs(
+          replaceWithArgs(commandString, argJson)
         );
-        let co = stdout ? stdout : "" + "\n" + errors && stderr ? stderr : "";
+        const { output: stdout } = await executeCommand(command, args);
+        let co = stdout;
         if (ocmode) output += "\n" + co;
         else output = co;
       } catch (e) {
+        console.log(e);
         return STATUS[
           console.log(
-            `Unable to execute command\n  executing ${command}\n  with args = ${JSON.stringify(
+            `Unable to execute command\n  executing ${commandString}\n  with args = ${JSON.stringify(
               argJson
             )}`
           )

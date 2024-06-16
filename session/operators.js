@@ -8,7 +8,7 @@ const {
   getCommandNArgs,
 } = require("../helpers/argHelper.js");
 const { executeCommand } = require("../helpers/executeCommand.js");
-const exec = util.promisify(require("child_process").exec);
+const path = require("path");
 
 const create = async (path, args) => {
   if (args.length !== 1)
@@ -146,4 +146,46 @@ const pop = async (path) => {
   return STATUS.SUCESSFULL;
 };
 
-module.exports = { create, erase, config, add, pop };
+const retitle = async (path, args) => {
+  if (args.length !== 1)
+    return STATUS[
+      console.log(
+        `Invalid Args\n  Expected 1 argument \n  args: address of code (* or number)`
+      )
+    ];
+  if (!fs.existsSync("____chnpsession_cohls"))
+    return STATUS[console.log(`No Session Detected`)];
+  const sessionObject = JSON.parse(
+    fs.readFileSync(path + "/____chnpsession_cohls")
+  );
+  const { codes } = sessionObject;
+  const n = args[0];
+  if (n === "*") {
+    for (const i in codes) {
+      const { title, filename } = codes[i];
+      const newTitle = prompt(
+        "Rename title of " + title + " having file " + filename + " to: "
+      );
+      if (newTitle != "") codes[i].title = newTitle;
+    }
+  } else {
+    const i = parseInt(n);
+    const { title, filename } = codes[i - 1];
+    const newTitle = prompt(
+      "Rename title of " + title + " having file " + filename + " to: "
+    );
+    try {
+      codes[i - 1].title = newTitle;
+    } catch (e) {
+      return STATUS[console.log("Invalid Arguement")];
+    }
+  }
+  sessionObject.codes = codes;
+  fs.writeFileSync(
+    path + "/____chnpsession_cohls",
+    JSON.stringify(sessionObject)
+  );
+  return STATUS.SUCESSFULL;
+};
+
+module.exports = { create, erase, config, add, pop, retitle };

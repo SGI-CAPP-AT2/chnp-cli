@@ -1,14 +1,19 @@
-const { STATUS } = require("./exec_status.js");
+const { STATUS } = require("../helpers/exec_status.js");
 const fs = require("fs");
 const prompt = require("prompt-sync")({ sigint: true });
-const util = require("util");
 const {
   replaceWithArgs,
   getArgsJson,
   getCommandNArgs,
 } = require("../helpers/argHelper.js");
 const { executeCommand } = require("../helpers/executeCommand.js");
-const path = require("path");
+
+/**
+ * create: This command is used to initialize the session of cohls
+ * @param {string} path path to current working directory
+ * @param {Array} args arguements which are going to be replaced with vars
+ * @returns Number determining wheather it's successful or not
+ */
 
 const create = async (path, args) => {
   if (args.length !== 1)
@@ -33,6 +38,13 @@ const create = async (path, args) => {
   );
   return config(path);
 };
+
+/**
+ * erase: this operator is used to erase the session details
+ * @param {string} path path to current working directory
+ * @param {Array} args arguements which are going to be replaced with vars
+ * @returns Number determining wheather it's successful or not
+ */
 
 const erase = async (path, args) => {
   if (args.length !== 0)

@@ -188,4 +188,22 @@ const retitle = async (path, args) => {
   return STATUS.SUCESSFULL;
 };
 
-module.exports = { create, erase, config, add, pop, retitle };
+const addpb = (path) => {
+  if (!fs.existsSync("____chnpsession_cohls"))
+    return STATUS[console.log(`No Session Detected`)];
+  const sessionObject = JSON.parse(
+    fs.readFileSync(path + "/____chnpsession_cohls")
+  );
+  const { codes } = sessionObject;
+  const last = { __cns: { pb: true }, ...codes[codes.length - 1] };
+  codes.pop();
+  codes.push(last);
+  sessionObject.codes = codes;
+  fs.writeFileSync(
+    path + "/____chnpsession_cohls",
+    JSON.stringify(sessionObject)
+  );
+  return STATUS.SUCESSFULL;
+};
+
+module.exports = { create, erase, config, add, pop, retitle, addpb };

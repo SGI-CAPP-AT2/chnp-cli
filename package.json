@@ -12,7 +12,8 @@
     "Print"
   ],
   "bin": {
-    "cohls": "./session/bin.js"
+    "cohls": "./session/bin.js",
+    "cohl": "./bin/index.js"
   },
   "author": "ShGI",
   "license": "ISC",

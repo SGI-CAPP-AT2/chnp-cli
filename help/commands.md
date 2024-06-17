@@ -2,8 +2,8 @@
 
 The commands available in CHNP cli are as following.
 
-1. [Cohls]()
-2. Cohl
+1. [Cohls](#cohls)
+2. [Cohl](#cohl)
 
 ## Cohls
 
@@ -13,12 +13,12 @@ It has following operators
 
 ### Cohls Operators
 
-1. [create operator](./operators#create)
-2. [erase operator](./operators#erase)
-3. [config operator](./operators#config)
-4. [add operator](./operators#add)
-5. [pop operator](./operators#pop)
-6. [retitle operator](./operators#retitle)
+1. [create operator](./operators.md#create)
+2. [erase operator](./operators.md#erase)
+3. [config operator](./operators.md#config)
+4. [add operator](./operators.md#add)
+5. [pop operator](./operators.md#pop)
+6. [retitle operator](./operators.md#retitle)
 
 ## Cohl
 

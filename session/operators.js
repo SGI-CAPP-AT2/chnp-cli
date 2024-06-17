@@ -89,7 +89,7 @@ const add = async (path, args) => {
   const sessionObject = JSON.parse(
     fs.readFileSync(path + "/____chnpsession_cohls")
   );
-  const { ocmode, errors, filenameWhileAdding, watermark } = sessionObject;
+  const { ocmode, filenameWhileAdding, watermark } = sessionObject;
   const batchOfCommands = sessionObject.commandsBatch;
   const argJson = getArgsJson(args);
   const filename = replaceWithArgs(filenameWhileAdding, argJson);

@@ -40,7 +40,7 @@ cohls erase
 Config operator is used to make changes in session object where the pattern to execute files is stored.
 Config command is automatically executed once the create is executed.
 
-[Read More about configurations](./config)
+[Read More about configurations](./config.md)
 
 ```ps
 cohls config

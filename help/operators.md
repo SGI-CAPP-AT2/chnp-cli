@@ -94,3 +94,9 @@ cohls addpb
 ```
 
 ## Cohl Operators
+
+1. [shelp operator](./operators.md#shelp)
+
+### shelp
+
+This operator is used to get help about the operators which redirects to [commands.md](./commands.md)

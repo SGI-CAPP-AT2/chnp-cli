@@ -22,4 +22,8 @@ It has following operators
 
 ## Cohl
 
-This command is respsonsible for printing the codes and other operations of cohl
+This command is respsonsible for printing the codes and other operations of cohl.
+
+### Cohls Operators
+
+1. [shelp operator](./operators.md#shelp)

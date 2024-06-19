@@ -132,6 +132,7 @@ const add = async (path, args) => {
     watermark,
     rtfBool: false,
     code,
+    time: Date.now(),
   };
   sessionObject.codes.push(codeObject);
   fs.writeFileSync(

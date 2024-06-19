@@ -32,6 +32,15 @@ const create = async (path, args) => {
   sessionObject.date = Date.now();
   sessionObject.title = args[0] ? args[0] : path;
   sessionObject.codes = [];
+  sessionObject.theme = {
+    name: "classic",
+    className: "def",
+  };
+  sessionObject.font = {
+    title: "MonoSpace",
+    className: "default-fonts",
+    css: "monospace",
+  };
   fs.writeFileSync(
     path + "/____chnpsession_cohls",
     JSON.stringify(sessionObject)

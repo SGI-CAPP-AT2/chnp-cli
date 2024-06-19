@@ -1,0 +1,18 @@
+[
+  {
+    "name": "classic",
+    "className": "def"
+  },
+  {
+    "name": "No outline",
+    "className": "mix"
+  },
+  {
+    "name": "black output",
+    "className": "bko"
+  },
+  {
+    "name": "Notebook",
+    "className": "ntb"
+  }
+]

@@ -1,24 +1,36 @@
 const { default: hljs } = require("highlight.js");
 const sanitize = require("sanitize-html");
 
-const generateHtmlPage = (title, arrayOfCodes, theme, font, online = true) => {
+const generateHtmlPage = (
+  title,
+  arrayOfCodes,
+  theme,
+  font,
+  online = true,
+  preview = false
+) => {
   const stringOfAllCodes = arrayOfCodes.reduce(
     (p, c) => p + __codeFragment(c),
     ""
   );
-  const baseString = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>%TITLE%</title><link rel="stylesheet" href="%CHNP.URL__1%" /><link rel="stylesheet" href="%CHNP.URL__2%" /><link rel="stylesheet" href="%CHNP.URL__3%" /><link rel="stylesheet" href="%CHNP.URL__4%" /><link rel="stylesheet" href="%CHNP.URL__5%" /><link rel="stylesheet" href="%CHNP.URL__6%" /><link rel="stylesheet" href="%CHNP.URL__7%" /></head><body class="print %THEME% %FONT%"><style>.outputBlock,.list{width: calc(100vw - 30px);}</style><div class="list" style="margin: auto;">%stringOfAllCodes%</body></html>`;
+  const onAfterPrintScript =
+    online || preview
+      ? ""
+      : "<script>window.onafterprint=()=>fetch(`/__done?printed=true&time=${Date.now()}`);print();</script>";
+  const baseString = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>%TITLE%</title><link rel="stylesheet" href="%CHNP.URL__1%" /><link rel="stylesheet" href="%CHNP.URL__2%" /><link rel="stylesheet" href="%CHNP.URL__3%" /><link rel="stylesheet" href="%CHNP.URL__4%" /><link rel="stylesheet" href="%CHNP.URL__5%" /><link rel="stylesheet" href="%CHNP.URL__6%" /><link rel="stylesheet" href="%CHNP.URL__7%" /></head><body class="print %THEME% %FONT%"><style>.outputBlock,.list{width: calc(100vw - 30px);}</style><div class="list" style="margin: auto;">%stringOfAllCodes% %onAfterPrintScript%</body></html>`;
   let newString = baseString;
-  if (online) {
-    const stringVars = require("./assets/linksToAssets.json");
-    for (const vari of Object.keys(stringVars)) {
-      newString = newString.replace(vari, stringVars[vari]);
-    }
+  let stringVars = require("./assets/linksToAssets.json");
+  if (!online) {
+    stringVars = require("./assets/linksToLocalAssets.json");
+  }
+  for (const vari of Object.keys(stringVars)) {
+    newString = newString.replace(vari, stringVars[vari]);
   }
   newString = newString.replace("%TITLE%", title);
   newString = newString.replace("%THEME%", theme.className);
   newString = newString.replace("%FONT%", font.className);
   newString = newString.replace("%stringOfAllCodes%", stringOfAllCodes);
-
+  newString = newString.replace("%onAfterPrintScript%", onAfterPrintScript);
   return newString;
 };
 

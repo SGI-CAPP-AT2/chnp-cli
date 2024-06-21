@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Preview Of Print</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .pillar {
+        height: 100vh;
+      }
+      .flx {
+        display: flex;
+      }
+      .opts {
+        flex-direction: column;
+        border-right: 1px solid black;
+      }
+      .p100 {
+        height: 100%;
+      }
+      .mrg {
+        margin: 10px;
+      }
+      button {
+        display: flex;
+      }
+      button img {
+        margin: auto;
+      }
+      button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 14px;
+        font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif;
+        border-radius: 6px;
+        color: #3d3d3d;
+        background: #fff;
+        border: none;
+        box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      button:focus {
+        box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.1),
+          0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+        outline: 0;
+      }
+
+      .prev {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flx pillar">
+      <div class="flx opts p100">
+        <button class="mrg" onclick="window.location.assign('/print')">
+          <img src="/print.svg" />
+        </button>
+        <button class="mrg" onclick="OpenUrlForClose('/__done')">
+          <img src="/cancel.svg" />
+        </button>
+      </div>
+      <div class="flx opts p100 prev">
+        <iframe
+          width="100%"
+          style="border: 0"
+          height="100%"
+          src="%PREVIEW_URL%"
+        >
+          UNABLE TO PREVIEW
+        </iframe>
+      </div>
+    </div>
+    <script>
+      const OpenUrlForClose = (url) => {
+        const wnd = window.open(url);
+        setTimeout(() => {
+          wnd.close();
+        }, 5000);
+      };
+    </script>
+  </body>
+</html>

@@ -27,3 +27,6 @@ This command is respsonsible for printing the codes and other operations of cohl
 ### Cohls Operators
 
 1. [shelp operator](./operators.md#shelp)
+2. [savepage operator](./operators.md#savepage)
+3. [theme & font change](./operators.md#theme--font)
+4. [print operator](./operators.md#print)

@@ -95,8 +95,43 @@ cohls addpb
 
 ## Cohl Operators
 
-1. [shelp operator](./operators.md#shelp)
+1. [shelp operator](#shelp)
+2. [savepage operator](#savepage)
+3. [theme & font change](#theme--font)
+4. [print operator](#print)
 
 ### shelp
 
 This operator is used to get help about the operators which redirects to [commands.md](./commands.md)
+
+### savepage
+
+This operators saves all added codes as html page to current working directory with the filename as `CHNP~$title.html` to cwd.
+
+```ps
+cohl savepage
+```
+
+### theme & font
+
+Theme and font lets you set theme of code blocks and font of codes respectively.
+
+#### Theme
+
+```ps
+cohl theme
+```
+
+#### Font
+
+```ps
+cohl font
+```
+
+### print
+
+This command creates localhost web server which serves the page which can be printed to obtain pdf or prints
+
+```ps
+cohl print
+```

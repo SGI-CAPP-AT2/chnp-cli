@@ -7,6 +7,7 @@ const {
   getCommandNArgs,
 } = require("../helpers/argHelper.js");
 const { executeCommand } = require("../helpers/executeCommand.js");
+const { VERSION } = require("../GLOBALS.js");
 
 /**
  * create: This command is used to initialize the session of cohls
@@ -28,7 +29,7 @@ const create = async (path, args) => {
     ];
   const sessionObject = {};
   sessionObject.path = path;
-  sessionObject.version = process.env.version;
+  sessionObject.version = VERSION;
   sessionObject.date = Date.now();
   sessionObject.title = args[0] ? args[0] : path;
   sessionObject.codes = [];

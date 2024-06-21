@@ -5,6 +5,7 @@ const { generateHtmlPage } = require("../core/html");
 const chalk = require("chalk");
 const pathmod = require("path");
 const { startOperationServer } = require("../core/server");
+const { PORT } = require("../GLOBALS");
 const prompt = require("prompt-sync")({ sigint: true });
 
 const shelp = async () => {
@@ -125,7 +126,7 @@ const print = async (path, args, restatus) => {
     },
     addr: "print",
     routes,
-    port: 61109,
+    port: PORT,
   });
   return STATUS.PENDING;
 };

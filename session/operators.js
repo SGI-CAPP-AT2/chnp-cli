@@ -5,6 +5,8 @@ const {
   replaceWithArgs,
   getArgsJson,
   getCommandNArgs,
+  getFileNameWithoutExtension,
+  getFileExtension,
 } = require("../helpers/argHelper.js");
 const { executeCommand } = require("../helpers/executeCommand.js");
 const { VERSION } = require("../GLOBALS.js");
@@ -229,4 +231,25 @@ const addpb = (path) => {
   return STATUS.SUCESSFULL;
 };
 
-module.exports = { create, erase, config, add, pop, retitle, addpb };
+const batch = async (path, [match$1with, ...args]) => {
+  if (!fs.existsSync("____chnpsession_cohls"))
+    return STATUS[console.log(`No Session Detected`)];
+  const sessionObject = JSON.parse(
+    fs.readFileSync(path + "/____chnpsession_cohls")
+  );
+  const filenameExtensionShouldBe = getFileExtension(
+    sessionObject.filenameWhileAdding
+  );
+  const fileNames = fs.readdirSync(path);
+  const $1WithExt = match$1with === "-ext";
+  for (const fileName of fileNames) {
+    if (getFileExtension(fileName) !== filenameExtensionShouldBe) continue;
+    const $1 = $1WithExt ? fileName : getFileNameWithoutExtension(fileName);
+    const retStatus = await add(path, [$1, ...args]);
+    if (STATUS.UNSUCCESSFULL === retStatus)
+      return STATUS[console.log("Unable to add " + $1)];
+  }
+  return STATUS.SUCESSFULL;
+};
+
+module.exports = { create, erase, config, add, pop, retitle, addpb, batch };

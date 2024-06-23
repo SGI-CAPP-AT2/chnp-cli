@@ -15,4 +15,24 @@ const getCommandNArgs = (c) => {
   const [command, ...args] = c.split(" ");
   return { command, args };
 };
-module.exports = { replaceWithArgs, getArgsJson, getCommandNArgs };
+const getFileNameWithoutExtension = (filename) => {
+  const lastDotIndex = filename.lastIndexOf(".");
+  if (lastDotIndex <= 0) {
+    return filename;
+  }
+  return filename.substring(0, lastDotIndex);
+};
+const getFileExtension = (filename) => {
+  const lastDotIndex = filename.lastIndexOf(".");
+  if (lastDotIndex <= 0) {
+    return "";
+  }
+  return filename.substring(lastDotIndex, filename.length - 1);
+};
+module.exports = {
+  replaceWithArgs,
+  getArgsJson,
+  getCommandNArgs,
+  getFileNameWithoutExtension,
+  getFileExtension,
+};

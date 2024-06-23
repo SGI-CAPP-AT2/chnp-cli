@@ -19,6 +19,7 @@ It has following operators
 4. [add operator](./operators.md#add)
 5. [pop operator](./operators.md#pop)
 6. [retitle operator](./operators.md#retitle)
+7. [batch operator](./operators.md#batch-adding)
 
 ## Cohl
 

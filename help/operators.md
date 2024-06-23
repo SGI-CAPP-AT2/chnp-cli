@@ -13,6 +13,7 @@ Operators are used to perform a specific operation in `cohls` or `cohl` command.
 4. [add operator](#add)
 5. [pop operator](#pop)
 6. [retitle operator](#retitle)
+7. [batch operator](#batch-adding)
 
 ### Create
 
@@ -91,6 +92,26 @@ Addpb is used to create a page break in between last added code and next code wh
 
 ```ps
 cohls addpb
+```
+
+### Batch adding
+
+Batch adding is used to add all the present files within the directory it selects the file which has same extension as filename while adding is specified.
+
+Batch adding will execute add for all the selected files.
+
+$1 argument will be replaced with the filename without extension.
+
+if want to replace it with filename with extension we can use `-ext` flag.
+
+```ps
+cohls batch
+```
+
+OR
+
+```ps
+cohls batch -ext
 ```
 
 ## Cohl Operators

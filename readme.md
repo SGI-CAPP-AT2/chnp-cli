@@ -16,8 +16,8 @@ By running above command you can install the application
 
 ## Docs
 
-[command](./help/commands.md)
-[operators](./help/operators.md)
-[config](./help//config.md)
-[fonts](./help/fonts/README.md)
-[themese](./help/themes/README.md)
+1. [command](./help/commands.md)
+2. [operators](./help/operators.md)
+3. [config](./help//config.md)
+4. [fonts](./help/fonts/README.md)
+5. [themese](./help/themes/README.md)

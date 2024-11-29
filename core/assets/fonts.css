@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&family=Open+Sans&family=Roboto&display=swap');
+@import url('fonts_internal.css');
 .default-fonts *{
     font-family: monospace;
 }

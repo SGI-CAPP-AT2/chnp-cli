@@ -20,4 +20,4 @@ const main = async ({ operators, op, wd, args }) => {
     process.exit(1);
   }
 };
-module.exports = { main };
+module.exports = { main, restatus };

@@ -5,7 +5,8 @@ const { generateHtmlPage } = require("../core/html");
 const chalk = require("chalk");
 const pathmod = require("path");
 const { startOperationServer } = require("../core/server");
-const { PORT } = require("../GLOBALS");
+const { PORT, THEMES_JSON } = require("../GLOBALS");
+const { checkForObject } = require("../helpers/checkforobject");
 const prompt = require("prompt-sync")({ sigint: true });
 
 const shelp = async () => {
@@ -37,7 +38,7 @@ const theme = (path) => {
   const sessionObject = JSON.parse(
     fs.readFileSync(path + "/____chnpsession_cohls")
   );
-  const themes = require("./../core/assets/themse.json");
+  const themes = THEMES_JSON;
   let i = 0;
   console.log("Choose any one theme: ");
   console.log("ID  THEME");
@@ -56,7 +57,7 @@ const theme = (path) => {
   );
   return STATUS.SUCESSFULL;
 };
-const font = (path) => {
+const font = (__path) => {
   if (!fs.existsSync("____chnpsession_cohls"))
     return STATUS[console.log(`No Session Detected`)];
   const sessionObject = JSON.parse(
@@ -82,52 +83,53 @@ const font = (path) => {
   return STATUS.SUCESSFULL;
 };
 const print = async (path, args, restatus) => {
-  if (!fs.existsSync("____chnpsession_cohls"))
-    return STATUS[console.log(`No Session Detected`)];
-  const sessionObject = JSON.parse(
-    fs.readFileSync(path + "/____chnpsession_cohls")
-  );
-  const { title, codes, theme, font } = sessionObject;
-  const routes = [
-    {
-      html: generateHtmlPage(title, codes, theme, font, false),
-      addr: "print",
-    },
-    {
-      html: fs
-        .readFileSync(__dirname + "/assets/preview.html")
-        .toString()
-        .replace("%PREVIEW_URL%", "__prev"),
-      addr: "",
-    },
-    {
-      html: generateHtmlPage(title, codes, theme, font, false, true),
-      addr: "__prev",
-    },
-  ];
-  startOperationServer({
-    onStart: async (serv) => {
-      await open(serv);
-      console.log(
-        chalk.yellowBright(
-          "If browser is not opened automatically, please refer following url"
-        )
-      );
-      console.log("Webpage is being served at \n  " + serv + "/");
-    },
-    onDone: ({ time, printed }) => {
-      if (printed === "true") {
+  const execute = () => {
+    const sessionObject = JSON.parse(
+      fs.readFileSync(path + "/____chnpsession_cohls")
+    );
+    const { title, codes, theme, font } = sessionObject;
+    const routes = [
+      {
+        html: generateHtmlPage(title, codes, theme, font, false),
+        addr: "print",
+      },
+      {
+        html: fs
+          .readFileSync(__dirname + "/assets/preview.html")
+          .toString()
+          .replace("%PREVIEW_URL%", "__prev"),
+        addr: "",
+      },
+      {
+        html: generateHtmlPage(title, codes, theme, font, false, true),
+        addr: "__prev",
+      },
+    ];
+    startOperationServer({
+      onStart: async (serv) => {
+        await open(serv);
         console.log(
-          chalk.green("Printed Successfully on " + new Date(parseInt(time)))
+          chalk.yellowBright(
+            "If browser is not opened automatically, please refer following url"
+          )
         );
-        restatus(STATUS.SUCESSFULL);
-      } else
-        restatus(STATUS[console.log(chalk.red("Operation may be canceled"))]);
-    },
-    addr: "print",
-    routes,
-    port: PORT,
-  });
-  return STATUS.PENDING;
+        console.log("Webpage is being served at \n  " + serv + "/");
+      },
+      onDone: ({ time, printed }) => {
+        if (printed === "true") {
+          console.log(
+            chalk.green("Printed Successfully on " + new Date(parseInt(time)))
+          );
+          restatus(STATUS.SUCESSFULL);
+        } else
+          restatus(STATUS[console.log(chalk.red("Operation may be canceled"))]);
+      },
+      addr: "print",
+      routes,
+      port: PORT,
+    });
+    return STATUS.PENDING;
+  };
+  return checkForObject(path, execute);
 };
 module.exports = { shelp, savepage, theme, font, print };

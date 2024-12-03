@@ -24,7 +24,7 @@ const create = async (path, args) => {
     sessionObject.path = path;
     sessionObject.version = VERSION;
     sessionObject.date = Date.now();
-    sessionObject.title = args[0] ? args[0] : path;
+    sessionObject.title = args[0] ? args[0] : sessionObject.date;
     sessionObject.codes = [];
     sessionObject.theme = {
       name: "classic",

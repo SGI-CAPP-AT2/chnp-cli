@@ -6,6 +6,10 @@ const restatus = (status) => {
   process.exit(0);
 };
 const main = async ({ operators, op, wd, args }) => {
+  if (!operators[op]) {
+    console.log(chalk.red("Operator not found !"));
+    return process.exit(1);
+  }
   try {
     const status = await operators[op](wd, args, restatus);
     console.log(chalk[colors[status]](`Operation is ${meaning[status]}`));
@@ -13,8 +17,11 @@ const main = async ({ operators, op, wd, args }) => {
     if (status !== STATUS.PENDING) process.exit(0);
   } catch (e) {
     console.log(
-      chalk.red(
-        "Operator not found\n  use 'cohl shelp' to get available operators"
+      chalk.red("Unexpected Error: "),
+      "\n ERROR: \n",
+      e,
+      chalk.yellow(
+        "\n PLEASE REPORT ERROR at: \n https://github.com/SGI-CAPP-AT2/chnp-cli//"
       )
     );
     process.exit(1);

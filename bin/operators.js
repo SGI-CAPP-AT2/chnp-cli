@@ -5,7 +5,7 @@ const { generateHtmlPage } = require("../core/html");
 const chalk = require("chalk");
 const pathmod = require("path");
 const { startOperationServer } = require("../core/server");
-const { PORT, THEMES_JSON } = require("../GLOBALS");
+const { PORT } = require("../GLOBALS");
 const { executeIfObject } = require("../helpers/objectHandler");
 const path = require("path");
 const prompt = require("prompt-sync")({ sigint: true });
@@ -34,46 +34,6 @@ const savepage = async (path) => {
     return STATUS.SUCESSFULL;
   };
   return await executeIfObject(path, execute);
-};
-const theme = (path) => {
-  const execute = (sessionObject, saveState) => {
-    const themes = THEMES_JSON;
-    let i = 0;
-    console.log("Choose any one theme: ");
-    console.log("ID  THEME");
-    for (let { name } of themes) {
-      console.log(++i + "   " + name);
-    }
-    const selectedTheme = prompt("Enter Id: ");
-    if (selectedTheme > themes.length || selectedTheme < 1) {
-      console.log("INVALID ID");
-      return STATUS.UNSUCCESSFULL;
-    }
-    sessionObject.theme = themes[selectedTheme - 1];
-    saveState();
-    return STATUS.SUCESSFULL;
-  };
-  return executeIfObject(path, execute);
-};
-const font = (__path) => {
-  const execute = (sessionObject, saveState) => {
-    const fonts = require("./../core/assets/fonts.json");
-    let i = 0;
-    console.log("Choose any one FONT: ");
-    console.log("ID  FONT");
-    for (let { title } of fonts) {
-      console.log(++i + "   " + title);
-    }
-    const selectedTheme = prompt("Enter Id: ");
-    if (selectedTheme > fonts.length || selectedTheme < 1) {
-      console.log("INVALID ID");
-      return STATUS.UNSUCCESSFULL;
-    }
-    sessionObject.font = fonts[selectedTheme - 1];
-    saveState();
-    return STATUS.SUCESSFULL;
-  };
-  return executeIfObject(__path, execute);
 };
 
 const print = async (__path, args, restatus) => {
@@ -124,4 +84,4 @@ const print = async (__path, args, restatus) => {
   return await executeIfObject(__path, execute);
 };
 
-module.exports = { shelp, savepage, theme, font, print };
+module.exports = { shelp, savepage, print };

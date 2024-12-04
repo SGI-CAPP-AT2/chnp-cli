@@ -20,6 +20,7 @@ It has following operators
 5. [pop operator](./operators.md#pop)
 6. [retitle operator](./operators.md#retitle)
 7. [batch operator](./operators.md#batch-adding)
+8. [theme & font change](./operators.md#theme--font)
 
 ## Cohl
 
@@ -29,5 +30,4 @@ This command is respsonsible for printing the codes and other operations of cohl
 
 1. [shelp operator](./operators.md#shelp)
 2. [savepage operator](./operators.md#savepage)
-3. [theme & font change](./operators.md#theme--font)
-4. [print operator](./operators.md#print)
+3. [print operator](./operators.md#print)

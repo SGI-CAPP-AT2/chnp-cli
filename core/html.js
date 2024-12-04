@@ -70,7 +70,7 @@ const __hl = (code, filename = "") => {
     str =
       "<span class='ln'>" + padLeadingZeros(parseInt(i) + 1, size) + "</span>";
     htmlLine = str + arrayOfAll[i];
-    htmlBlock += htmlLine;
+    htmlBlock += htmlLine + "<br/>";
   }
   return htmlBlock;
 };

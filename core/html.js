@@ -48,7 +48,7 @@ const __codeFragment = (cq) =>
     cq.watermark
   }</span></p></div><br>${__date(new Date(cq.time))}${__pb(cq.__cns)}`;
 const __date = (dateObj) => `
-<div class="dt" align="left"><span class="date-wm"><img src="https://cdn.jsdelivr.net/gh/SGI-CAPP-AT2/code-highlight-n-print/tool/ss/fonts/imgs/time.svg" alt="Date WaterMark"><strong>${dateObj}</strong> <small>(${dateObj.getTime()})</small></span></div>
+<div class="dt" align="left"><span class="date-wm"><img src="/time.svg" alt="Date WaterMark"><strong>${dateObj}</strong> <small>(${dateObj.getTime()})</small></span></div>
 `;
 const __hl = (code, filename = "") => {
   const highlight = () => {
@@ -70,7 +70,7 @@ const __hl = (code, filename = "") => {
     str =
       "<span class='ln'>" + padLeadingZeros(parseInt(i) + 1, size) + "</span>";
     htmlLine = str + arrayOfAll[i];
-    htmlBlock += htmlLine;
+    htmlBlock += htmlLine + "<br/>";
   }
   return htmlBlock;
 };

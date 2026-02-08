@@ -14,6 +14,7 @@ Operators are used to perform a specific operation in `cohls` or `cohl` command.
 5. [pop operator](#pop)
 6. [retitle operator](#retitle)
 7. [batch operator](#batch-adding)
+8. [theme & font change](#theme--font)
 
 ### Create
 
@@ -114,25 +115,6 @@ OR
 cohls batch -ext
 ```
 
-## Cohl Operators
-
-1. [shelp operator](#shelp)
-2. [savepage operator](#savepage)
-3. [theme & font change](#theme--font)
-4. [print operator](#print)
-
-### shelp
-
-This operator is used to get help about the operators which redirects to [commands.md](./commands.md)
-
-### savepage
-
-This operators saves all added codes as html page to current working directory with the filename as `CHNP~$title.html` to cwd.
-
-```ps
-cohl savepage
-```
-
 ### theme & font
 
 Theme and font lets you set theme of code blocks and font of codes respectively.
@@ -147,6 +129,24 @@ cohl theme
 
 ```ps
 cohl font
+```
+
+## Cohl Operators
+
+1. [shelp operator](#shelp)
+2. [savepage operator](#savepage)
+3. [print operator](#print)
+
+### shelp
+
+This operator is used to get help about the operators which redirects to [commands.md](./commands.md)
+
+### savepage
+
+This operators saves all added codes as html page to current working directory with the filename as `CHNP~$title.html` to cwd.
+
+```ps
+cohl savepage
 ```
 
 ### print

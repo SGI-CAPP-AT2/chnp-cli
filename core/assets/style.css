@@ -93,3 +93,8 @@ p *
 .imageOutput > img{
     max-height: 550px;
 }
+p br{
+    display: block;
+    height: 0.5px;
+    content: "." !important;
+}
